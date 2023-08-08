@@ -1,49 +1,43 @@
 #include "main.h"
-
+#include <stdlib.h>
 /**
- * _strlen - count length of a string.
- * @str: pointer to string.
- * Return: length of @str.
+ * str_concat - concatenates two strings
+ * @s1: the first string
+ * @s2: the second string
+ *
+ * Return: a pointer to the newly allocated space in memory,
+ *         which contains s1, followed by the first n bytes of s2,
+ *         and null terminated. If the function fails, it should return NULL.
  */
-
-int _strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (i);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-/**
- * str_concat - concatenates two strings.
- * @s1: 1st string.
- * @s2: 2nd string.
- * Return: return pointer to the newly allocated space in memory
- * which contains the contents of @s1, followed by the contents of @s2.
- * NULL on failure.
- */
-
 char *str_concat(char *s1, char *s2)
 {
-	int len;
-	int i, j;
-	char *new;
+	char *str;
+	int i = 0;
+	int j = 0;
+	int f;
+	int g;
 
-	i = 0;
-	j = 0;
-	len = _strlen(s1) + _strlen(s2);
-	new = malloc(sizeof(char) * len + 1);
-	if (!new)
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+
+	while (s1[i] != '\0')
+		i++;
+
+	while (s2[j] != '\0')
+		j++;
+
+	str = malloc(i + j + 1);
+
+	if (str == NULL)
 		return (NULL);
-	while (s1 && s1[i])
-		new[j++] = s1[i++];
-	i = 0;
-	while (s2 && s2[i])
-		new[j++] = s2[i++];
-	new[j] = '\0';
-	return (new);
+	for (f = 0; f < i; f++)
+		str[f] = s1[f];
+	for (g = i; g < i + j; g++)
+		str[g] = s2[g - i];
+
+	str[i + j] = '\0';	/* Add null-terminating character at the end */
+
+	return (str);
 }
