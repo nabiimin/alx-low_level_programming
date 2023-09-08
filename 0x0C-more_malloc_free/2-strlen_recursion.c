@@ -1,14 +1,23 @@
 #include "main.h"
+#include <stdlib.h>
+
 /**
- * _strlen_recursion - Main Entry
- * @s: input
+ * _calloc - Main Entry
+ * @nmemb: input
+ * @size: input
  * Return: 0
  */
-int _strlen_recursion(char *s)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	if (*s != '\0')
-	{
-		return (1 + _strlen_recursion(s + 1));
-	}
-	return (0);
+	char *p;
+	unsigned int i;
+
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	p = malloc(nmemb * size);
+	if (p == NULL)
+		return (NULL);
+	for (i = 0; i < (nmemb * size); i++)
+		p[i] = 0;
+	return (p);
 }
