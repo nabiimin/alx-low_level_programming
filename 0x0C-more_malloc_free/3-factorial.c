@@ -1,18 +1,26 @@
 #include "main.h"
+#include <stdlib.h>
+
 /**
- * factorial - Main Entry
- * @n: input
+ * array_range - Main Entry
+ * @min: input
+ * @max: input
  * Return: 0
  */
-int factorial(int n)
+int *array_range(int min, int max)
 {
-	if (n == 0)
+	int i, l;
+	int *a;
+
+	if (min > max)
+		return (NULL);
+	l = max - min + 1;
+	a = malloc(sizeof(int) * l);
+	if (a == NULL)
+		return (NULL);
+	for (i = 0; i < l; i++, min++)
 	{
-		return (1);
+		a[i] = min;
 	}
-	else if (n < 0)
-	{
-		return (-1);
-	}
-	return (n * factorial(n - 1));
+	return (a);
 }
